@@ -1,6 +1,7 @@
 #include <iostream>
 #include "tools.h"
 
+using namespace std;
 using Eigen::VectorXd;
 using Eigen::MatrixXd;
 using std::vector;
@@ -17,12 +18,12 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
   rmse << 0,0,0,0;
   
   if (estimations.size() == 0){
-      cout << "Error: no estimations vector!" << endl;
+      std::cout << "Error: no estimations vector!" << endl;
       return rmse;
   }
   
   if (estimations.size() != ground_truth.size()){
-      cout << "Error: Vector size mismatch!" << endl;
+      std::cout << "Error: Vector size mismatch!" << endl;
       return rmse;
   }   
 
