@@ -11,8 +11,27 @@ Tools::~Tools() {}
 
 VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
                               const vector<VectorXd> &ground_truth) {
-  /**
-  TODO:
-    * Calculate the RMSE here.
-  */
+  
+  
+  VectorXd rmse(4);
+  rmse << 0,0,0,0;
+  
+  if (estimations.size() == 0){
+      cout << "Error: no estimations vector!" << endl;
+      return rmse;
+  }
+  
+  if (estimations.size() != ground_truth.size()){
+      cout << "Error: Vector size mismatch!" << endl;
+      return rmse;
+  }   
+
+  for(int i=0; i < estimations.size(); ++i){
+      VectorXd diff = (estimations[i] - ground_truth[i]).array().pow(2);
+      rmse += diff;
+  }
+
+  rmse /= estimations.size();
+  rmse = rmse.array().sqrt();
+  return rmse;  
 }
