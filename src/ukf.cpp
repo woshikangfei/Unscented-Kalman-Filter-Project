@@ -44,6 +44,8 @@ UKF::UKF() {
 
   // Radar measurement noise standard deviation radius change in m/s
   std_radrd_ = 0.3;
+	
+  is_initialized_ = false;	
 
   n_aug_ = 7;
 
@@ -91,8 +93,8 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
             0,
             0,
             0;
-        }
-        else if (meas_package.sensor_type_ == MeasurementPackage::LASER) {
+       }
+     else if (meas_package.sensor_type_ == MeasurementPackage::LASER) {
             float x0 = meas_package.raw_measurements_[0];
             float x1 = meas_package.raw_measurements_[1];
             float px = (x0 == 0) ? 0.001 : x0;
