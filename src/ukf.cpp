@@ -145,16 +145,15 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
 * measurement and this one.
 */
 void UKF::Prediction(double delta_t) {
- 
-
-  Xsig.col(0) = x_;
-  lambda_ = 3 - n_x_;	
+  	
   //create sigma point matrix
   MatrixXd Xsig = MatrixXd(n_x_, 2 * n_x_ + 1);
 
   //calculate square root of P
   MatrixXd A = P_.llt().matrixL();
-
+  Xsig.col(0) = x_;
+  lambda_ = 3 - n_x_;
+	
   //set remaining sigma points
   for (int i = 0; i < n_x_; i++){
     Xsig.col(i + 1) = x_ + sqrt(lambda_ + n_x_) * A.col(i);
